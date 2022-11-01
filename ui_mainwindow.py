@@ -17,7 +17,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(847, 520)
+        MainWindow.resize(847, 538)
         self.actionAbrir = QAction(MainWindow)
         self.actionAbrir.setObjectName(u"actionAbrir")
         self.actionGuardar = QAction(MainWindow)
@@ -181,6 +181,26 @@ class Ui_MainWindow(object):
         self.gridLayout_4.addWidget(self.table, 0, 0, 1, 3)
 
         self.tabWidget.addTab(self.tab_4, "")
+        self.tab = QWidget()
+        self.tab.setObjectName(u"tab")
+        self.gridLayout_5 = QGridLayout(self.tab)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.graphicsView = QGraphicsView(self.tab)
+        self.graphicsView.setObjectName(u"graphicsView")
+
+        self.gridLayout_5.addWidget(self.graphicsView, 0, 0, 1, 2)
+
+        self.dibujar = QPushButton(self.tab)
+        self.dibujar.setObjectName(u"dibujar")
+
+        self.gridLayout_5.addWidget(self.dibujar, 1, 0, 1, 1)
+
+        self.limpiar = QPushButton(self.tab)
+        self.limpiar.setObjectName(u"limpiar")
+
+        self.gridLayout_5.addWidget(self.limpiar, 1, 1, 1, 1)
+
+        self.tabWidget.addTab(self.tab, "")
 
         self.gridLayout_3.addWidget(self.tabWidget, 0, 1, 1, 1)
 
@@ -201,7 +221,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -236,6 +256,9 @@ class Ui_MainWindow(object):
         self.search_lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Id de la particula", None))
         self.buscar_pushButton.setText(QCoreApplication.translate("MainWindow", u"Buscar", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Tabla", None))
+        self.dibujar.setText(QCoreApplication.translate("MainWindow", u"Dibujar", None))
+        self.limpiar.setText(QCoreApplication.translate("MainWindow", u"Limpiar", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Dibujo", None))
         self.menuArchivo.setTitle(QCoreApplication.translate("MainWindow", u"Archivo", None))
     # retranslateUi
 

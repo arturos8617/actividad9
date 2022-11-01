@@ -1,5 +1,7 @@
-from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem
+from turtle import color
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene
 from PySide2.QtCore import Slot
+from PySide2.QtGui import QPen, QColor, QTransform
 from ui_mainwindow import Ui_MainWindow
 from particulasact.particula import Particula
 from particulasact.index import Nodo, Lista_ligada
@@ -20,6 +22,34 @@ class MainWindow(QMainWindow):
         self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
         self.ui.mostrar_tabla_pushButton.clicked.connect(self.mostrar_tabla)
         self.ui.buscar_pushButton.clicked.connect(self.buscar_particula)
+        self.ui.dibujar.clicked.connect(self.dibujar)
+        self.ui.limpiar.clicked.connect(self.limpiar)
+        self.scene = QGraphicsScene()
+        self.ui.graphicsView.setScene(self.scene)
+
+    def wheelEvent(self, event):
+        if event.delta() > 0:
+            self.ui.graphicsView.scale(1.2, 1.2)
+        else:
+            self.ui.graphicsView.scale(.8, .8)
+
+    @Slot()
+    def dibujar(self):
+        pen = QPen()
+        pen.setWidth(2)
+        for particula in self.lista_ligada:
+            color = QColor(particula.red, particula.green, particula.blue)
+            pen.setColor(color)
+            self.scene.addEllipse(particula.origen_x,
+                                  particula.origen_y, 5, 5, pen)
+            self.scene.addEllipse(particula.destino_x,
+                                  particula.destino_y, 5, 5, pen)
+            self.scene.addLine(particula.origen_x+3, particula.origen_y+3,
+                               particula.destino_x+3, particula.destino_y+3, pen)
+
+    @Slot()
+    def limpiar(self):
+        self.scene.clear()
 
     def creadorDeParticulas(self):
         id = self.ui.id_lineEdit.text()
